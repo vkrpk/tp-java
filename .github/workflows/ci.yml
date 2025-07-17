@@ -27,7 +27,7 @@ jobs:
           distribution: 'adopt'
       
       - name: Update JWT Secret in application.properties
-        run: sed -i 's/${JWT_SECRET}/${{ secrets.JWT_SECRET }}/' src/main/resources/application.properties
+        run: sed -i "s|\\\${JWT_SECRET}|${{ secrets.JWT_SECRET }}|g" src/main/resources/application.properties
       
       - name: Update DB_HOST in application.properties, to database service name in docker-compose (db)
         run: sed -i 's/${DB_HOST}/db/' src/main/resources/application.properties
